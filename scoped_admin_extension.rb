@@ -11,9 +11,12 @@ class ScopedAdminExtension < Radiant::Extension
   # the only complications come from allowing sharing between sites
     
   def activate
-    Layout.send :is_site_scoped
-    Snippet.send :is_site_scoped
+    # Layout.send :is_site_scoped, :shareable => true
+    # Snippet.send :is_site_scoped, :shareable => true
+    Layout.send :is_site_scoped, :shareable => true
+    Snippet.send :is_site_scoped, :shareable => true
     User.send :is_site_scoped, :shareable => true
+    # Dashboard.send :is_site_scoped
     ApplicationHelper.send :include, ScopedHelper
         
     unless admin.users.edit.form && admin.users.edit.form.include?('choose_site')
